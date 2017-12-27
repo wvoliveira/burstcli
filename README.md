@@ -1,4 +1,4 @@
-[![build status](http://gitlab.devel/wellingtonoliveira/burstcli/badges/master/build.svg)](http://gitlab.devel/wellingtonoliveira/burstcli/commits/master)
+[![build status](https://travis-ci.org/wvoliveira/burstcli.svg?branch=master)](https://github.com/wvoliveira/burstcli)
 Burstcli
 ---------
 
