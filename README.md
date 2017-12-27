@@ -1,4 +1,5 @@
-[![build status](https://travis-ci.org/wvoliveira/burstcli.svg?branch=master)](https://github.com/wvoliveira/burstcli)
+[![build status](https://travis-ci.org/wvoliveira/burstcli.svg?branch=master)](https://travis-ci.org/wvoliveira/burstcli)
+
 Burstcli
 ---------
 
