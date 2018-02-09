@@ -1,11 +1,10 @@
 import ldap3
 
 
-def auth_ad(user, password, domain_server, domain_name, base_dn):
+def auth_ad(user, password, domain_server, domain_prefix, base_dn):
     try:
-        """Simple authentication for AD"""
         server = ldap3.Server(domain_server, get_info=ldap3.ALL)
-        connection = ldap3.Connection(server, user=domain_name + '\\' + user, password=password, authentication=ldap3.NTLM, auto_bind=True)
+        connection = ldap3.Connection(server, user=domain_prefix + '\\' + user, password=password, authentication=ldap3.NTLM, auto_bind=True)
 
         _filter = '(objectclass=person)'
         attrs = ['SamAccountName']
@@ -16,10 +15,10 @@ def auth_ad(user, password, domain_server, domain_name, base_dn):
             usernames.append(username['attributes']['sAMAccountName'])
 
         if user not in usernames:
-            print('Voce nao esta no grupo Diretoria TI!')
+            print('Need to be in the IT Management group!')
             return False
-
         return True
+
     except Exception as error:
-        input('Erro ao tentar autenticar: {}'.format(error))
+        input('Error to authenticate: {}'.format(error))
         return False

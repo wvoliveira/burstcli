@@ -1,3 +1,0 @@
-pymysql
-tabulate
-ldap3

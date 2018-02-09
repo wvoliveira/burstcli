@@ -1,3 +1,8 @@
-*.xml
 *.iml
+*.xml
 .vscode
+.cache
+.coverage
+*.egg-info
+build
+dist
