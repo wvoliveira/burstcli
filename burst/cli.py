@@ -17,11 +17,9 @@ USERNAME = None
 GLPI = None
 
 
-class ExampleConf(argparse.Action):
-    def __init__(self, option_strings, dest, nargs=None, **kwargs):
-        if nargs is not None:
-            raise ValueError("nargs not allowed")
-        super(ExampleConf, self).__init__(option_strings, dest, **kwargs)
+class Example(argparse.Action):
+    def __init__(self, option_strings, dest='==SUPPRESS==', default='==SUPPRESS==', help='show example config file and exit'):
+        super(Example, self).__init__( option_strings=option_strings, dest=dest, default=default, nargs=0, help=help)
 
     def __call__(self, parser, namespace, values, option_string=None):
         package_dir = sys.modules['burst'].__path__[0]
@@ -31,17 +29,21 @@ class ExampleConf(argparse.Action):
             print(file.read())
             exit(0)
 
-        setattr(namespace, self.dest, values)
 
-
-parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter,
-                                 description='GLPI - Open some tickets in one time.\n{0}'.format(__git__),
-                                 prog='burst')
-
-parser.add_argument('-c', '--conf', metavar='\b', help='.env or config file', required=True)
+parser = argparse.ArgumentParser(formatter_class=argparse.RawDescriptionHelpFormatter, description='GLPI - Open some tickets in one time.\n{0}'.format(__git__), prog='burst')
+parser.add_argument('--conf', metavar='file', help='config file', required=True)
 parser.add_argument('--version', action='version', version='%(prog)s 1.0')
-parser.add_argument('example', action=ExampleConf)
+parser.add_argument('--example', action=Example)
 args = parser.parse_args()
+
+
+def example_conf():
+    package_dir = sys.modules['burst'].__path__[0]
+    example_file = os.path.join(package_dir, 'conf/example.ini')
+
+    with open(example_file) as file:
+        print(file.read())
+        exit(0)
 
 
 def main_menu():
