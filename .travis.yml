@@ -1,5 +1,9 @@
 language: python
 python:
+  - "3.4"
+  - "3.5"
   - "3.6"
+install:
+  - pip3 install -U .
 script:
-  - python -m py_compile burstcli.py
+  - burst -h
