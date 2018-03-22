@@ -26,12 +26,12 @@ class Glpi(object):
         return ad['server'], ad['prefix'], ad['base']
 
     def connection(self):
-        sql_server, sql_name, sql_user, sql_pass = self.__sql()
-        connection = pymysql.connect(host=sql_server, user=sql_name, passwd=sql_user, db=sql_pass)
+        sql_server, sql_db, sql_user, sql_pass = self.__sql()
+        connection = pymysql.connect(host=sql_server, db=sql_db, user=sql_user, passwd=sql_pass)
         return connection.cursor()
 
-    def search_user(self, id_name):
-        query = "SELECT id, name FROM glpi_users WHERE name LIKE '%{0}%' OR id == '%{0}%'".format(id_name)
+    def search_user(self, name):
+        query = "SELECT id, name FROM glpi_users WHERE name = '{0}'".format(name)
         with self.connection() as cursor:
             cursor.execute(query)
             return cursor.fetchall()

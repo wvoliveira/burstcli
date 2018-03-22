@@ -19,7 +19,7 @@ GLPI = None
 
 class Example(argparse.Action):
     def __init__(self, option_strings, dest='==SUPPRESS==', default='==SUPPRESS==', help='show example config file and exit'):
-        super(Example, self).__init__( option_strings=option_strings, dest=dest, default=default, nargs=0, help=help)
+        super(Example, self).__init__(option_strings=option_strings, dest=dest, default=default, nargs=0, help=help)
 
     def __call__(self, parser, namespace, values, option_string=None):
         package_dir = sys.modules['burst'].__path__[0]
@@ -70,12 +70,7 @@ def exec_menu(choice):
     if ch == '':
         menu_actions['main_menu']()
     else:
-        try:
-            menu_actions[ch]()
-        except KeyError:
-            print('Invalid option. Try again!\n')
-            time.sleep(1)
-            menu_actions['main_menu']()
+        menu_actions[ch]()
 
 
 def menu_open_ticket():
