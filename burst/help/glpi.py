@@ -16,7 +16,7 @@ class Glpi(object):
 
     def __sql(self):
         sql = self.__config_parser('sql')
-        return sql['server'], sql['name'], sql['user'], sql['pass']
+        return sql['server'], sql['db'], sql['user'], sql['pass']
 
     def url(self):
         return self.__config_parser('glpi')['url']
